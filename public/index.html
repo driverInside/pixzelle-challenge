@@ -1,26 +1,107 @@
+<!DOCTYPE html>
 <html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>pixzelle</title>
+		<link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <link rel="stylesheet" href="stylesheets/style.css">
+        <!-- <link rel="stylesheet" href="stylesheets/debug.css"> -->
+	</head>
+	<body>
+    <div id="app">
+      <!-- section -->
+      <section class="section">
+        <div class="container has-text-centered">
+          <h1 class="title is-size-2">Pixzelle</h1>
+          <h5 class="subtitle is-size-3">User finder</h5>
+        </div>
+      </section>
+      <!-- section -->
+      
+      <!-- section -->
+      <section class="section">
+        <div class="container">
+          <!-- div.columns -->
+          <div class="columns is-mobile">
+              <div class="column is-three-fifths is-offset-one-fifth">
+                <!-- form -->
+                <form>
+                  <div class="field is-grouped">
+                      <p class="control is-expanded has-icons-left">
+                          <input id="username" v-model="username" pattern="\w" class="input is-large" type="text" placeholder="username" required autofocus>
+                          <span class="icon is-medium is-left">
+                            <i class="fas fa-user fa-lg"></i>
+                          </span>
+                      </p>
+                      <p class="control">
+                        <button class="button is-info is-large" v-on:click="searchUser">
+                          Search
+                        </button>
+                      </p>
+                  </div>
+                </form>
+                <!-- /form -->
+              </div>
+          </div>
+          <!-- /div.columns -->
+        </div>
+      </section>
+      <!-- /section -->
 
-<head>
-  <title>Express</title>
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" href="/stylesheets/style.css">
 
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-</head>
+      <!-- section -->
+      <section class="section result">
+        <div class="container">
+          <div class="column is-mobile">
+            <div class="column is-three-fifths is-offset-one-fifth">
+              <div class="notification" v-show="user && user._id">
+                <button class="delete" v-on:click="clear"></button>
+                <!-- media -->
+                <article class="media center">
+                    <figure class="media-left">
+                      <span class="image is-96x96">
+                        <img class="is-rounded" src="https://www.fillmurray.com/g/96/96">
+                      </span>
+                    </figure>
+                    <div class="media-content">
+                      <div class="content">
+                        <p>
+                            <strong>{{user.firstName}} {{user.lastName}}</strong> <a>@{{user.username}}</a><br>
+                            <span class="icon">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <span>{{user.email}}</span><br>
+                            <span class="has-text-grey">{{user.biography}}</span><br>
+                            <span class="icon">
+                                <i class="fab fa-github"></i>
+                            </span>
+                            <span>{{user.github}}</span><br>
+                        </p>
+                       
+                      </div>
+                    </div>
+                  </article>
+                <!-- /media -->
+              </div>
 
-<body>
-  <h1>Express</h1>
-  <p>Welcome to Express</p>
-  <p>lol</p>
+              <div class="notification is-danger" v-show="error">
+                <button class="delete" v-on:click="clear"></button>
+                The user {{ username }} was not found.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /section -->
+    </div>
 
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <!-- development version, includes helpful console warnings -->
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</body>
 
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="javascripts/index.js"></script>
+	</body>
 </html>
